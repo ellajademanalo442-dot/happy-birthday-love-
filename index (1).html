@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday My Love</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Reenie+Beanie&family=Italiana&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars" aria-hidden="true" id="stars"></div>
+
+<main class="wrap">
+  <div class="eyebrow">a little something for you</div>
+  <h1>Happy Birthday,<br>my love</h1>
+
+  <button class="env" id="env" aria-label="Open the letter">
+    <div class="env-body"><div class="flap"></div><div class="seal">&hearts;</div></div>
+    <span class="env-hint">tap to open</span>
+  </button>
+
+  <section class="letter" id="letter">
+    <p class="to">Happy birthday, My Boo:)</p>
+    <p>Another year has come, and I am so thankful na nandito ka pa rin kasama ko ngayong araw. Thank you kasi you never leave my side kapag pagod ako, kapag nagtatampo ako, and through every single moment of my life. For me, you turn every ordinary day into something special, just by being you.</p>
+    <p>Sana matupad mo lahat ng pangarap mo, sana laging safe, masaya, and healthy ka palagi. Mahal na mahal kita, love, more than I can ever put into words. Cheers to more birthdays, more laughs, and more memories that I get to make with you:)</p>
+    <p class="from">Love,<br>Ella</p>
+  </section>
+
+  <h2>Us, so far</h2>
+  <p class="sub">a few of my favorite memories</p>
+  <div class="wall">
+    <figure class="pola" style="margin:0"><div class="frame"><img src="photo1.jpg" alt="Us by the sea at sunset" style="object-position:50% 78%"></div><figcaption>our first memory</figcaption></figure>
+    <figure class="pola" style="margin:0"><div class="frame"><img src="photo2.jpg" alt="Us together in a photo booth" style="object-position:50% 30%"></div><figcaption>every moment with you hits different</figcaption></figure>
+    <figure class="pola" style="margin:0"><div class="frame"><img src="photo3.jpg" alt="Us in a close selfie" style="object-position:50% 50%"></div><figcaption>your cute chaotic side</figcaption></figure>
+    <figure class="pola" style="margin:0"><div class="frame"><img src="photo4.jpg" alt="Us at night among the lights" style="object-position:50% 30%"></div><figcaption>the one I fell for</figcaption></figure>
+  </div>
+
+  <h2>Things that I love</h2>
+  <p class="sub">about you, always</p>
+  <ul class="reasons">
+    <li>How gentle and calm you stay even when I get moody</li>
+    <li>The way you try so hard just to make me smile</li>
+    <li>How safe and protected I feel whenever I'm with you</li>
+    <li>How you listen patiently to all my random, silly stories</li>
+    <li>The genuine way you love me, no pretensions at all</li>
+  </ul>
+
+  <section class="cake">
+    <h2 style="margin-top:0">Make a wish</h2>
+    <p class="sub">tap the candle</p>
+    <button class="candle" id="candle" aria-label="Blow out the candle">
+      <div class="flame"></div><div class="stick"></div><div class="cakebase"></div>
+    </button>
+    <div class="wish" id="wish" aria-live="polite"></div>
+  </section>
+
+  <div class="foot">made with love, just for you</div>
+</main>
+<script>
+(function () {
+  var s = document.getElementById('stars');
+  for (var i = 0; i < 40; i++) {
+    var d = document.createElement('i');
+    d.style.left = Math.random() * 100 + '%';
+    d.style.top = Math.random() * 100 + '%';
+    d.style.animationDelay = (Math.random() * 4) + 's';
+    s.appendChild(d);
+  }
+  var env = document.getElementById('env'), letter = document.getElementById('letter');
+  env.addEventListener('click', function () {
+    env.classList.add('open');
+    env.querySelector('.env-hint').textContent = 'for you';
+    setTimeout(function () { letter.classList.add('show'); letter.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 600);
+  });
+  document.querySelectorAll('.pola input').forEach(function (inp) {
+    inp.addEventListener('change', function () {
+      var f = inp.files && inp.files[0]; if (!f) return;
+      var r = new FileReader();
+      r.onload = function () {
+        var label = inp.parentNode, old = label.querySelector('img'); if (old) old.remove();
+        var img = new Image(); img.src = r.result; img.alt = 'Our photo';
+        label.appendChild(img);
+        var ph = label.querySelector('.ph'); if (ph) ph.hidden = true;
+      };
+      r.readAsDataURL(f);
+    });
+  });
+  var c = document.getElementById('candle');
+  c.addEventListener('click', function () {
+    c.classList.add('out');
+    document.getElementById('wish').textContent = 'May all your wishes come true. I love you.';
+  });
+})();
+</script>
+</body>
+</html>
